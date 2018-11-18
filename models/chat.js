@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Chat     = sequelize.define('Chat', {
     id         : DataTypes.BIGINT.UNSIGNED,
-    name       : { DataTypes.STRING,
+    name       : { type: DataTypes.STRING,  },
     description: DataTypes.STRING,
     owner      : DataTypes.BIGINT,
     createdAt  : DataTypes.DATE,
