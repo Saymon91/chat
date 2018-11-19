@@ -25,7 +25,11 @@ module.exports = {
         defaultValue: null,
         type        : Sequelize.DATE
       }
-    });
+    })
+      .then(() => queryInterface.addIndex('users', ['uuid'], { unique: true }))
+      .then(() => queryInterface.addIndex('users', ['status']))
+      .then(() => queryInterface.addIndex('users', ['created_at']))
+      ;
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('users');

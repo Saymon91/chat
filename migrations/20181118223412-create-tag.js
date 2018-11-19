@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('chats', {
+    return queryInterface.createTable('tags', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,9 +9,6 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
-      },
-      description: {
         type: Sequelize.STRING
       },
       owner_id: {
@@ -26,13 +23,13 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
-      .then(() => queryInterface.addIndex('chats', ['name']))
-      .then(() => queryInterface.addIndex('chats', ['owner_id']))
-      .then(() => queryInterface.addIndex('chats', ['created_at']))
-      .then(() => queryInterface.addIndex('chats', ['owner_id', 'name'], { unique: true }))
+      .then(() => queryInterface.addIndex('tags', ['name', 'owner_id'], { unique: true }))
+      .then(() => queryInterface.addIndex('tags', ['name']))
+      .then(() => queryInterface.addIndex('tags', ['owner_id']))
+      .then(() => queryInterface.addIndex('tags', ['created_at']))
       ;
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('chats');
+    return queryInterface.dropTable('tags');
   }
 };

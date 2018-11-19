@@ -1,31 +1,33 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('chats', {
-      name: {
+  up  : (queryInterface, Sequelize) => {
+    return queryInterface.createTable('message_directions', {
+      owner_id   : {
+        allowNull: false,
+        type: Sequelize.BIGINT
+      },
+      name       : {
+        allowNull: false,
         type: Sequelize.STRING
       },
       description: {
         type: Sequelize.STRING
       },
-      owner: {
-        type: Sequelize.BIGINT
-      },
-      created_at: {
+      created_at : {
         allowNull: false,
-        type: Sequelize.DATE
+        type     : Sequelize.DATE
       },
-      updated_at: {
+      updated_at : {
         allowNull: false,
-        type: Sequelize.DATE
+        type     : Sequelize.DATE
       }
-    }).then(() => queryInterface.addConstraint('Users', ['firstName', 'lastName'], {
+    }).then(() => queryInterface.addConstraint('message_directions', ['owner_id', 'name'], {
       type: 'primary key',
-      name: 'users_pkey'
+      name: 'message_directions_pk'
     }));
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('chats');
+    return queryInterface.dropTable('message_directions');
   }
 };

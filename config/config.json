@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "bbp-user",
+    "username": "bbp-chat",
     "password": "bbp-chat",
     "database": "bbp-chat",
     "host": "127.0.0.1",

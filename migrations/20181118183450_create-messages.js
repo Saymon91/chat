@@ -8,6 +8,10 @@ module.exports = {
         primaryKey   : true,
         type         : Sequelize.BIGINT
       },
+      chat_id   : {
+        allowNull   : false,
+        type        : Sequelize.INTEGER.UNSIGNED
+      },
       parent_id   : {
         allowNull   : true,
         defaultValue: null,
@@ -21,11 +25,11 @@ module.exports = {
       subject     : {
         allowNull   : true,
         defaultValue: null,
-        type        : Sequelize.STRING(55)
+        type        : Sequelize.JSON
       },
       content     : {
         allowNull: false,
-        type     : Sequelize.TEXT
+        type     : Sequelize.JSON
       },
       delivered_at: {
         allowNull   : true,
@@ -46,7 +50,12 @@ module.exports = {
         defaultValue: null,
         type        : Sequelize.DATE
       }
-    });
+    })
+      .then(() => queryInterface.addIndex('messages', ['chat_id']))
+      .then(() => queryInterface.addIndex('messages', ['parent_id']))
+      .then(() => queryInterface.addIndex('messages', ['from_id']))
+      .then(() => queryInterface.addIndex('messages', ['created_at']))
+      ;
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('messages');
